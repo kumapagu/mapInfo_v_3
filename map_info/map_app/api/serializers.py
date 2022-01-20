@@ -1,12 +1,8 @@
 from rest_framework import serializers
-from map_app.models import ParkInfo, Positions
-
-class PositionsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Positions
-        fields = "__all__"
+from map_app.models import ParkInfo
 
 class ParkInfoSerializer(serializers.ModelSerializer):
+    # position = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = ParkInfo
         fields = "__all__"
