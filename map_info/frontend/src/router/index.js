@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/Home";
 import Maps from "../views/Maps"
+import InfoEditor from "../views/InfoEditor"
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,12 @@ const routes = [
     component: Maps,
     props: true
   },
+  {
+    path: "/info", 
+    name: "info",
+    component: InfoEditor,
+    props: true
+  }
 ];
 
 const router = new VueRouter({

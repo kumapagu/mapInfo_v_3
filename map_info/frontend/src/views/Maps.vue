@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="map" class="map" ref="googleMap" />
-    <!-- <v-btn @click="createInfo">情報を登録する</v-btn> -->
+    <v-btn @click="createInfo">情報を登録する</v-btn>
   </div>
 </template>
 
@@ -62,16 +62,16 @@ export default {
         this.lng = null
       }
     },
-    // createInfo(){
-    //   this.$router.push({
-    //     name: 'info',
-    //     params: {
-    //       lat: this.lat,
-    //       lng: this.lng,
-    //       name: 'Taro'
-    //     }
-    //   })
-    // }
+    createInfo(){
+      this.$router.push({
+        name: 'info',
+        params: {
+          lat: this.lat,
+          lng: this.lng,
+          name: 'Taro'
+        }
+      })
+    }
     
     
   }
