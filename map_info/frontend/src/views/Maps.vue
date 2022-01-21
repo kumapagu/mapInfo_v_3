@@ -68,7 +68,6 @@ export default {
         params: {
           lat: this.lat,
           lng: this.lng,
-          name: 'Taro'
         }
       })
     }
