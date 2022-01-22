@@ -43,8 +43,7 @@ export default {
     initializeMap() {
       const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig);
       this.setMarker(map)
-      map.addListener("click", (e) => {
-        
+      map.addListener("click", (e) => {       
         this.deleteMarker()
         this.placeMarkerAndPanTo(e.latLng, map);
         this.lat = e.latLng.lat()
@@ -52,7 +51,7 @@ export default {
         // console.log(this.lat)
         // console.log(this.lng)
       });
-      
+
     },
     placeMarkerAndPanTo(latLng, map) {
       let marker = new this.google.maps.Marker({
@@ -78,15 +77,36 @@ export default {
     },
     setMarker(map) {
       for(this.park of this.parks){
+        let infoContent = 
+          `<p>${this.park.park_name}</p>` + `<a href='/park/${ this.park.id }'>編集</a>`
+        let infoWindow = new this.google.maps.InfoWindow({content: infoContent, maxWidth: 200})
         let latLng = new this.google.maps.LatLng(this.park.lat,this.park.lng)
         let marker = new this.google.maps.Marker({
         position: latLng,
+
         // map: map,
         });
         marker.setMap(map)
-        // console.log(this.park.park_name)
+
+        marker.addListener("click", ()=>{
+          infoWindow.open({
+            anchor: marker,
+            map,
+            shouldFocus: false
+          })
+        })
+        
       }
     },
+    // setWindow() {
+    //   let link = document.getElementById('link')
+    //     console.log(link)
+    //     link.addEventListener("click", ()=>{
+    //       this.$router.push({
+    //         name: 'info',
+    //       })
+    //     })
+    // },
 
     createInfo(){
       this.$router.push({
