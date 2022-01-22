@@ -12,7 +12,7 @@
         class="job-link"
         >情報
         </router-link>
-        <a href="http://127.0.0.1:8000/maps">aタグ</a>
+        <a href="http://127.0.0.1:8000/info">aタグ</a>
         <v-btn to="maps">map</v-btn>
     </div>
 </template>
