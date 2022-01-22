@@ -7,6 +7,7 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader';
+import { apiService } from "../common/api.service"
 export default {
   name: 'Maps',
   props: {
@@ -25,17 +26,23 @@ export default {
       marker: null,
       lat: null,
       lng: null,
+      parks: [],
+      park: null
     }
   },
   async mounted() {
     this.google = await GoogleMapsApiLoader({
       apiKey: process.env.VUE_APP_GOOGLE_API 
     });
+    // this.$nextTick(()=>{
+    //   this.initializeMap()
+    // })
     this.initializeMap();
   },
   methods: {
     initializeMap() {
       const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig);
+      this.setMarker(map)
       map.addListener("click", (e) => {
         
         this.deleteMarker()
@@ -62,6 +69,25 @@ export default {
         this.lng = null
       }
     },
+    
+    getParks() {
+      let endpoint = "api/parks/"
+      apiService(endpoint).then(data => {
+          this.parks.push(...data.results)
+      })  
+    },
+    setMarker(map) {
+      for(this.park of this.parks){
+        let latLng = new this.google.maps.LatLng(this.park.lat,this.park.lng)
+        let marker = new this.google.maps.Marker({
+        position: latLng,
+        // map: map,
+        });
+        marker.setMap(map)
+        // console.log(this.park.park_name)
+      }
+    },
+
     createInfo(){
       this.$router.push({
         name: 'info',
@@ -70,16 +96,18 @@ export default {
           lng: this.lng,
         }
       })
-    }
-    
-    
+    }    
+  },
+  created() {
+        this.getParks()
+        // console.log(this.parks)
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .map {
-  width: 100vw;
-  height: 100vh;
+  width: 80vw;
+  height: 80vh;
 }
 </style>

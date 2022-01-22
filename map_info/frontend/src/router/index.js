@@ -13,13 +13,13 @@ const routes = [
     component: Home,
   },
   {
-    path: "/maps",
+    path: "/maps/",
     name: "maps",
     component: Maps,
     props: true
   },
   {
-    path: "/info", 
+    path: "/info/", 
     name: "info",
     component: InfoEditor,
     props: true
@@ -28,7 +28,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes
 });
 

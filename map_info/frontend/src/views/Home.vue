@@ -7,6 +7,13 @@
                 <p><img src="park.image"></p>
             </div>
         </v-container>
+        <router-link
+        :to="{name: 'info'}"
+        class="job-link"
+        >情報
+        </router-link>
+        <a href="http://127.0.0.1:8000/maps">aタグ</a>
+        <v-btn to="maps">map</v-btn>
     </div>
 </template>
 
@@ -21,7 +28,6 @@ export default {
     },
     methods: {
         getParks() {
-            
             let endpoint = "api/parks/"
             apiService(endpoint).then(data => {
                 this.parks.push(...data.results)
