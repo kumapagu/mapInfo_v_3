@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 # MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 4,
+    'PAGE_SIZE': 1000,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
 }
 
