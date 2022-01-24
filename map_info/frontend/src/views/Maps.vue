@@ -9,7 +9,7 @@
 import GoogleMapsApiLoader from 'google-maps-api-loader';
 import { apiService } from "../common/api.service"
 export default {
-  name: 'Maps',
+  name: 'maps',
   props: {
 
   },
@@ -55,6 +55,7 @@ export default {
       let marker = new this.google.maps.Marker({
         position: latLng,
         map: map,
+        icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
       });
       this.marker = marker
     },
@@ -67,9 +68,9 @@ export default {
       }
     },
     
-    getParks() {
+    async getParks() {
       let endpoint = "api/parks/"
-      apiService(endpoint).then(data => {
+      await apiService(endpoint).then(data => {
           this.parks.push(...data.results)
       })  
     },
@@ -97,8 +98,6 @@ export default {
         let latLng = new this.google.maps.LatLng(this.park.lat,this.park.lng)
         let marker = new this.google.maps.Marker({
         position: latLng,
-
-        // map: map,
         });
         marker.setMap(map)
 
@@ -108,9 +107,9 @@ export default {
             map,
             shouldFocus: false
           })
-        })
-        
+        })        
       }
+      document.title = 'MapInfo';
     },
     // setWindow() {
     //   let link = document.getElementById('link')
@@ -132,11 +131,11 @@ export default {
       })
     }    
   },
-  created() {
-    this.getParks()
-  },
+  // created() {
+  //   this.getParks()
+  // },
   beforeRouteEnter(to, from, next) {
-  next(vm => { vm.getParks(), vm.setMarker(); });
+  next(vm => { vm.getParks() });
 }
 }
 </script>
