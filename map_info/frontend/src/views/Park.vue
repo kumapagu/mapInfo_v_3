@@ -2,12 +2,16 @@
     <div>
         <v-container>
             <h2 class="mb-5">{{ park.park_name }}</h2>
-            <p>職種：{{ park.playset_slide }}</p>
-            <p>内容：{{ park.playset_swing }}</p>
-            <p>給料：{{ park.playset_sandbox }}円</p>
-            <p>都道府県：{{ park.id }}</p>
-            <p>市町村：{{ park.parking }}</p>
-            <v-btn color="success" class="mr-2" :to="{ name: 'info', params: { id: park.id } }">編集</v-btn>
+            <p>ブランコ：{{ park.playset_swing }}</p>
+            <p>すべり台：{{ park.playset_slide }}</p>
+            <p>砂場：{{ park.playset_sandbox }}</p>
+            <p>水道：{{ park.water_services }}</p>
+            <p>自転車置き場：{{ park.bicycle_parking }}</p>
+            <p>駐車場：{{ park.parking }}</p>
+            <p>自動販売機：{{ park.vending_machine }}</p>
+            <p>その他の情報：{{ park.add_info }}</p>
+            <v-btn color="primary" class="mr-2" :to="{ name: 'info', params: { id: park.id } }">編集</v-btn>
+            <v-btn color="primary" :to="{name:'maps'}">マップへ戻る</v-btn>
             <!-- <v-btn color="error" @click="deleteJobData">削除</v-btn> -->
         </v-container>
     </div>
