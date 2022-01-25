@@ -6,6 +6,6 @@
     <v-main>
       <router-view />
     </v-main>
-    <v-footer color="primary" dark app class="justify-center">Vue_django_GoogleMapAPI</v-footer>
+    <v-footer color="primary" dark app class="justify-center">Vue_django_GoogleMapsAPI</v-footer>
   </v-app>
 </template>

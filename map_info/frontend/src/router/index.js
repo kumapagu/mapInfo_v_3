@@ -30,14 +30,14 @@ const routes = [
     name: "park",
     component: Park,
     props: true,
-    children: [
-      {
-        path: "/park/:id/edit",
-        name: 'edit',
-        component: InfoEditor,
-        props: true
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "/park/:id/edit",
+    //     name: 'edit',
+    //     component: InfoEditor,
+    //     props: true
+    //   }
+    // ]
   },
 ];
 

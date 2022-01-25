@@ -10,7 +10,7 @@
             <p>駐車場：{{ park.parking }}</p>
             <p>自動販売機：{{ park.vending_machine }}</p>
             <p>その他の情報：{{ park.add_info }}</p>
-            <v-btn color="primary" @click="isDisplay = !isDisplay" class="mr-2" :to="{ name: 'edit', params: { id: park.id } }">編集</v-btn>
+            <v-btn color="primary" @click="isDisplay = !isDisplay" class="mr-2" :to="{ name: 'info', params: { id: park.id } }">編集</v-btn>
             <v-btn color="primary" href="/">マップへ戻る</v-btn>
             <!-- <v-btn color="error" @click="deleteJobData">削除</v-btn> -->
         </v-container>

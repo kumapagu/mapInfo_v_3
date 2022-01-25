@@ -128,20 +128,28 @@ export default {
         lat: this.d_lat,
         lng: this.d_lng,
       }).then(park_data => {
-        this.$router.go({
-          path: this.$router.currentRoute.path,
-          force: true
+        this.$router.push({
+          name: 'park',
+          params: { id: park_data.id }
         })
       })     
     },
     setSession(){
-      sessionStorage.setItem('lat', this.lat)
-      sessionStorage.setItem('lng', this.lng)
+      sessionStorage.setItem('lat', this.d_lat)
+      sessionStorage.setItem('lng', this.d_lng)
     }
   },
   created() {
     document.title = "Editor - park"
-    this.setSession()
+    
+  },
+  mounted(){
+    if(this.d_lat){
+      this.setSession()
+    }else{
+      this.d_lat = Number((sessionStorage.getItem('lat')))
+      this.d_lng = Number((sessionStorage.getItem('lng')))
+    }
   }
 }
 
