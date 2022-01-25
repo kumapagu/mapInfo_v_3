@@ -33,8 +33,13 @@ export default {
     data() {
         return {
             park: {},
-            isDisplay: true
+            isDisplay: true,
+            lat: null,
+            lng: null
         }
+    },
+    mounted() {
+        
     },
     methods: {
         setPageTitle(title) {
@@ -45,9 +50,16 @@ export default {
             apiService(endpoint).then(data => {
                 this.park = data;
                 this.setPageTitle(data.park_name);
-                // this.$forceUpdate()
-            });
+                this.lat = data.lat
+                this.lng = data.lng
+                this.setSession()
+            })
         },
+    setSession(){
+      console.log(this.lat)
+      sessionStorage.setItem('lat', this.lat)
+      sessionStorage.setItem('lng', this.lng)
+    }
 
         // deleteJobData() {
         //     let endpoint = `/api/jobs/${this.id}/`;
@@ -60,7 +72,13 @@ export default {
     },
     created() {
         this.getParkData()
-    }    
+        
+        
+    },
+    beforeDestroy(){
+        
+    }
+
 }
 </script>
 

@@ -29,13 +29,18 @@ export default {
       lng: null,
       parks: [],
       markers: [],
-      map: null
+      map: null,
+      session_info: null
     }
   },
   async mounted() {
     this.google = await GoogleMapsApiLoader({
       apiKey: process.env.VUE_APP_GOOGLE_API 
-    });
+    })
+    if(sessionStorage.getItem('lat')){
+      this.mapConfig.center.lat = Number((sessionStorage.getItem('lat')))
+      this.mapConfig.center.lng = Number((sessionStorage.getItem('lng')))
+    }
     this.initializeMap();
     window.onload = ()=>{
       this.setMarker()
@@ -43,6 +48,8 @@ export default {
   },
   methods: {
     initializeMap() {
+      
+      
       const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig);
       this.map = map
       map.addListener("click", (e) => {
@@ -50,8 +57,6 @@ export default {
         this.placeMarkerAndPanTo(e.latLng, map);
         this.lat = e.latLng.lat()
         this.lng = e.latLng.lng()
-        // console.log(this.lat)
-        // console.log(this.lng)
       });
       
     },
@@ -91,7 +96,7 @@ export default {
           `<li>自動販売機：${park.vending_machine}</li>` +
           '</ul>' +
           `<p>その他の情報：<br>${park.add_info}</p>` +
-          `<a href='/park/${ park.id }'>編集</a>` +
+          `<a href='/park/${ park.id }'>詳細</a>` +
           '<style>' +
           'h3 { text-align:center; }' +
           'ul { list-style:none; }' +

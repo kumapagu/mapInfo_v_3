@@ -112,8 +112,8 @@ export default {
       let endpoint = "/api/parks/"
       let method = "POST"
       if (this.id !== undefined) {
-          endpoint += `${this.id}/`;
-          method = "PUT";
+          endpoint += `${this.id}/`
+          method = "PUT"
       }
       apiService(endpoint, method, {
         park_name: this.park_name,
@@ -132,15 +132,18 @@ export default {
           path: this.$router.currentRoute.path,
           force: true
         })
-        console.log(park_data)
-      })
+      })     
     },
-    created() {
-      document.title = "Editor - park";
+    setSession(){
+      sessionStorage.setItem('lat', this.lat)
+      sessionStorage.setItem('lng', this.lng)
     }
+  },
+  created() {
+    document.title = "Editor - park"
+    this.setSession()
   }
-
-    
 }
+
 
 </script>
