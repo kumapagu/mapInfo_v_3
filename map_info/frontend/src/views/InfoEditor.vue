@@ -80,7 +80,8 @@ export default {
       parking: '無し',
       add_info: '',
       d_lat: this.lat,
-      d_lng: this.lng
+      d_lng: this.lng,
+      isDisplay: true
       
     }
   },
@@ -127,37 +128,13 @@ export default {
         lat: this.d_lat,
         lng: this.d_lng,
       }).then(park_data => {
-        this.$router.push({
-          name: 'park',
-          params: {id: park_data.id}
+        this.$router.go({
+          path: this.$router.currentRoute.path,
+          force: true
         })
         console.log(park_data)
       })
     },
-    // goToHome(){
-    //   this.$router.push({
-    //     name: 'maps'
-    //   })
-    // },
-    // async beforeRouteEnter (to, from, next) {
-    //   if (to.params.id !== undefined) {
-    //     let endpoint = `/api/parks/${ to.params.id }/`;
-    //     let data = await apiService(endpoint);        
-    //     return next(vm => {
-    //         (vm.park_name = data.park_name),
-    //         (vm.playset_swing = data.playset_swing),
-    //         (vm.playset_slide = data.playset_slide),
-    //         (vm.playset_sandbox = data.playset_sandbox),
-    //         (vm.vending_machine = data.vending_machine),
-    //         (vm.water_services = data.water_services),
-    //         (vm.bicycle_parking = data.bicycle_parking)
-    //         (vm.parking = data.parking)
-    //         (vm.add_info = data.add_info)
-    //     });
-    //   } else {
-    //       return next();
-    //   }
-    // },
     created() {
       document.title = "Editor - park";
     }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container>
+        <v-container v-show="isDisplay">
             <h2 class="mb-5">{{ park.park_name }}</h2>
             <p>ブランコ：{{ park.playset_swing }}</p>
             <p>すべり台：{{ park.playset_slide }}</p>
@@ -10,11 +10,14 @@
             <p>駐車場：{{ park.parking }}</p>
             <p>自動販売機：{{ park.vending_machine }}</p>
             <p>その他の情報：{{ park.add_info }}</p>
-            <v-btn color="primary" class="mr-2" :to="{ name: 'info', params: { id: park.id } }">編集</v-btn>
+            <v-btn color="primary" @click="isDisplay = !isDisplay" class="mr-2" :to="{ name: 'edit', params: { id: park.id } }">編集</v-btn>
             <v-btn color="primary" href="/">マップへ戻る</v-btn>
             <!-- <v-btn color="error" @click="deleteJobData">削除</v-btn> -->
         </v-container>
+        
+        <router-view v-show="!isDisplay" />
     </div>
+    
 </template>
 
 <script>
@@ -29,7 +32,8 @@ export default {
     },
     data() {
         return {
-            park: {}
+            park: {},
+            isDisplay: true
         }
     },
     methods: {
@@ -41,8 +45,10 @@ export default {
             apiService(endpoint).then(data => {
                 this.park = data;
                 this.setPageTitle(data.park_name);
+                // this.$forceUpdate()
             });
         },
+
         // deleteJobData() {
         //     let endpoint = `/api/jobs/${this.id}/`;
         //     apiService(endpoint, "DELETE").then(() => {
@@ -54,7 +60,7 @@ export default {
     },
     created() {
         this.getParkData()
-    }
+    }    
 }
 </script>
 

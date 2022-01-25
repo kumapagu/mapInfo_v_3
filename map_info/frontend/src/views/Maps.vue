@@ -115,6 +115,7 @@ export default {
       document.title = 'MapInfo';
     },
     createInfo(){
+      if(this.lat && this.lng){
       this.$router.push({
         name: 'info',
         params: {
@@ -122,6 +123,9 @@ export default {
           lng: this.lng,
         }
       })
+      }else{
+        alert('場所を選択してください')
+      }
     }    
   },
   created() {
