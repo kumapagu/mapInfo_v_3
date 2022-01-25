@@ -1,7 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit">
+    <v-btn text class="ml-5 mt-3" color="primary" href="/">マップへ戻る</v-btn>
     <v-container>
-      <v-row  justify="center">
+      <v-row  class="mx-auto">
         <v-col cols="10">
           <v-text-field v-model="park_name" label="公園名" required></v-text-field>
         </v-col>
@@ -50,7 +51,8 @@
         </v-col>
         
       </v-row>
-      <v-btn color="primary" type="submit">情報を登録</v-btn>
+      
+      <v-btn color="primary" type="submit">情報を登録</v-btn>      
     </v-container>
   </form>
 
@@ -132,6 +134,11 @@ export default {
         console.log(park_data)
       })
     },
+    // goToHome(){
+    //   this.$router.push({
+    //     name: 'maps'
+    //   })
+    // },
     // async beforeRouteEnter (to, from, next) {
     //   if (to.params.id !== undefined) {
     //     let endpoint = `/api/parks/${ to.params.id }/`;

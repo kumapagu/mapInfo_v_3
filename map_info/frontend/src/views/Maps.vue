@@ -28,7 +28,8 @@ export default {
       lat: null,
       lng: null,
       parks: [],
-      park: null
+      markers: [],
+      map: null
     }
   },
   async mounted() {
@@ -36,12 +37,15 @@ export default {
       apiKey: process.env.VUE_APP_GOOGLE_API 
     });
     this.initializeMap();
+    window.onload = ()=>{
+      this.setMarker()
+    }
   },
   methods: {
     initializeMap() {
       const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig);
-      this.setMarker(map)
-      map.addListener("click", (e) => {       
+      this.map = map
+      map.addListener("click", (e) => {
         this.deleteMarker()
         this.placeMarkerAndPanTo(e.latLng, map);
         this.lat = e.latLng.lat()
@@ -49,7 +53,7 @@ export default {
         // console.log(this.lat)
         // console.log(this.lng)
       });
-
+      
     },
     placeMarkerAndPanTo(latLng, map) {
       let marker = new this.google.maps.Marker({
@@ -62,65 +66,54 @@ export default {
     deleteMarker() {
       if (this.marker){
         this.marker.setMap(null)
-        this.maker = null
         this.lat = null
         this.lng = null
       }
     },
     
-    async getParks() {
+    getParks() {
       let endpoint = "api/parks/"
-      await apiService(endpoint).then(data => {
+      apiService(endpoint).then(data => {
           this.parks.push(...data.results)
       })  
     },
-    setMarker(map) {
-      for(this.park of this.parks){
+    setMarker() {
+      for(const park of this.parks){
         let infoContent = 
-          `<h3>${this.park.park_name}</h3>` + 
+          `<h3>${park.park_name}</h3>` + 
           '<ul>' +
-          `<li>ブランコ：${this.park.playset_swing}</li>` +
-          `<li>すべり台：${this.park.playset_slide}</li>` +
-          `<li>砂場：${this.park.playset_sandbox}</li>` +
-          `<li>水道：${this.park.water_services}</li>` +
-          `<li>自転車置場：${this.park.bicycle_parking}</li>` +
-          `<li>駐車場：${this.park.parking}</li>` +
-          `<li>自動販売機：${this.park.vending_machine}</li>` +
+          `<li>ブランコ：${park.playset_swing}</li>` +
+          `<li>すべり台：${park.playset_slide}</li>` +
+          `<li>砂場：${park.playset_sandbox}</li>` +
+          `<li>水道：${park.water_services}</li>` +
+          `<li>自転車置場：${park.bicycle_parking}</li>` +
+          `<li>駐車場：${park.parking}</li>` +
+          `<li>自動販売機：${park.vending_machine}</li>` +
           '</ul>' +
-          `<p>その他の情報：<br>${this.park.add_info}</p>` +
-          `<a href='/park/${ this.park.id }'>編集</a>` +
+          `<p>その他の情報：<br>${park.add_info}</p>` +
+          `<a href='/park/${ park.id }'>編集</a>` +
           '<style>' +
           'h3 { text-align:center; }' +
           'ul { list-style:none; }' +
           '</style>'
-
         let infoWindow = new this.google.maps.InfoWindow({content: infoContent, maxWidth: 200})
-        let latLng = new this.google.maps.LatLng(this.park.lat,this.park.lng)
+        let latLng = new this.google.maps.LatLng(park.lat,park.lng)
         let marker = new this.google.maps.Marker({
         position: latLng,
         });
-        marker.setMap(map)
+        this.markers.push(marker)
+        marker.setMap(this.map)
 
         marker.addListener("click", ()=>{
           infoWindow.open({
             anchor: marker,
-            map,
+            map: this.map,
             shouldFocus: false
           })
-        })        
+        })
       }
       document.title = 'MapInfo';
     },
-    // setWindow() {
-    //   let link = document.getElementById('link')
-    //     console.log(link)
-    //     link.addEventListener("click", ()=>{
-    //       this.$router.push({
-    //         name: 'info',
-    //       })
-    //     })
-    // },
-
     createInfo(){
       this.$router.push({
         name: 'info',
@@ -131,12 +124,9 @@ export default {
       })
     }    
   },
-  // created() {
-  //   this.getParks()
-  // },
-  beforeRouteEnter(to, from, next) {
-  next(vm => { vm.getParks() });
-}
+  created() {
+    this.getParks()
+  },
 }
 </script>
 
