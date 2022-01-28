@@ -1,0 +1,1 @@
+web: gunicorn apl_name : map_app --log-file -
