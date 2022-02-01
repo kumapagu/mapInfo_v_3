@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # from map_info.settings_secret import SECRET_KEY
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -142,3 +143,5 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
     }
 }
+
+django_heroku.settings(locals())
