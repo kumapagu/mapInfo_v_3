@@ -4,7 +4,7 @@ module.exports = {
   // publicPath: "http://0.0.0.0:8080/",
   publicPath: "https://nameless-fortress-82323.herokuapp.com/static/dist/",
   // publicPath: "https://nameless-fortress-82323.herokuapp.com/dist/",
-  outputDir: "./dist/",
+  outputDir: "./dist/static/",
 
   chainWebpack: (config) => {
     config
