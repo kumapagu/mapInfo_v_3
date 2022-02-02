@@ -2,7 +2,7 @@ const BundleTracker = require("webpack-bundle-tracker");
 
 module.exports = {
   // publicPath: "http://0.0.0.0:8080/",
-  publicPath: "/dist/static/",
+  publicPath: "/static/",
   // publicPath: "https://nameless-fortress-82323.herokuapp.com/dist/",
   outputDir: "./dist/static/",
 
