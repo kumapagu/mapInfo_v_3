@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # from .settings_secret import *
 SECRET_KEY = os.environ['SECRET_KEY']
 # BASICAUTH_USERS = BASICAUTH_USERS
-BASICAUTH_USERS = os.environ['BASICAUTH_USERS']
+BASICAUTH_USERS = {os.environ.get('USER'):os.environ.get('PASS')}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
