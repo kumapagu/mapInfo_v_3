@@ -43,6 +43,7 @@
           <input type="radio" value="無し" v-model="parking"> 無し
         </v-col>
         <v-col cols="10">
+          
           <v-textarea solo label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
         
