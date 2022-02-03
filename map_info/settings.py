@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # from map_info.settings_secret import SECRET_KEY
 # from .settings_secret import *
-BASICAUTH_USERS={'user': "map1234"}
 
 SECRET_KEY = os.environ['SECRET_KEY']
 

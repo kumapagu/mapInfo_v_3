@@ -56,7 +56,6 @@ export default {
             })
         },
         setSession(){
-        console.log(this.lat)
         sessionStorage.setItem('lat', this.lat)
         sessionStorage.setItem('lng', this.lng)
         },
