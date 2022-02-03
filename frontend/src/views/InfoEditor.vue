@@ -80,7 +80,6 @@ export default {
     }
   },
   async beforeRouteEnter (to, from, next) {
-    console.log('test')
       if (to.params.id !== undefined) {
         let endpoint = `/api/parks/${ to.params.id }/`
         let data = await apiService(endpoint)
