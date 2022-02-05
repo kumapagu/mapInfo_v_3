@@ -126,7 +126,56 @@ https://mapinfo-6239.herokuapp.com/
 
 ## ローカルでの動作方法
 ***
+### コマンドの実行
+git clone https://github.com/kumapagu/mapInfo.git
+cd mapInfo
+python -m pip install -r requirements.txt
+cd frontend
+npm install
 
+### ローカルで立ち上げる設定
+1. djangoのSECRET_KEYの生成
+* ルートディレクトリにget_random_secret_key.pyを作成
+* 作成したget_random_secret_key.pyのファイル内に以下のコードを入力する
+
+```python:get_random_secret_key.py
+from django.core.management.utils import get_random_secret_key
+ 
+secret_key = get_random_secret_key()
+text = 'SECRET_KEY = \'{0}\''.format(secret_key)
+print(text)
+```
+
+* コマンドで「python get_random_secret_key.py」を実行する
+* 画面にSECRET_KEYが表示されるので、コピーをする
+
+2. settings.pyの変更
+* 26行目〜32行目を削除もしくはコメントアウトする
+* コピーしたSECRET_KEYを使用して、以下のコードを追記する
+
+```python:
+SECRET_KEY='生成したSECRET_KEY'
+```
+
+3. views.pyの変更
+* map_appディレクトリ内のviews.pyを開く
+* 6行目を削除もしくはコメントアウトする
+
+4. マイグレートとスーパーユーザーの作成をする
+* コマンドで「python manage.py migrate」を実行する（ルートディレクトリで行う）
+* コマンドで「python manage.py createsuperuser」を実行して、情報を登録する
+
+5. frontendディレクトリ内のvue.config.jsの確認
+* ファイル内のコメントを参考にして、ローカルで立ち上げる際の形にする
+
+6. ローカルサーバーを立ち上げて、「<http://localhost:8000/admin/>」へアクセスし作成した情報でログインをしたらトップページ「<http://localhost:8000/>」へアクセスする
+
+以上の方法でローカルで立ち上げることができる
+
+※この状態だと、GoogleMapAPIのキーが未設定の状態なので動作自体はするがMapが正しく表示されない。
+
+※APIキーを持っている場合
+frontend/src/views/Maps.vue内の38行目に記載されているapikeyの項目に入力されている「process.env.VUE_APP_GOOGLE_API」を持っているAPIキーに置き換えることで正常にMapの表示をすることができる
 
 ## 工夫したポイント
 ***
