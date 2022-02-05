@@ -128,10 +128,10 @@ https://mapinfo-6239.herokuapp.com/
 ## ローカルでの動作方法
 ***
 ### コマンドの実行
-git clone https://github.com/kumapagu/mapInfo.git
-cd mapInfo
-python -m pip install -r requirements.txt
-cd frontend
+git clone https://github.com/kumapagu/mapInfo.git  
+cd mapInfo  
+python -m pip install -r requirements.txt  
+cd frontend  
 npm install
 
 ### ローカルで立ち上げる設定
