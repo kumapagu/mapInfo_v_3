@@ -9,10 +9,6 @@
         
         <v-col cols="4">
           ブランコ:
-          <!-- <v-radio-group v-model="info.playset_swing" row>
-            <v-radio label="有り" value="有り"></v-radio>
-            <v-radio label="無し" value="無し"></v-radio>
-          </v-radio-group> -->
           <input type="radio" value="有り" v-model="playset_swing"> 有り
           <input type="radio" value="無し" v-model="playset_swing"> 無し
         </v-col>
@@ -47,6 +43,7 @@
           <input type="radio" value="無し" v-model="parking"> 無し
         </v-col>
         <v-col cols="10">
+          
           <v-textarea solo label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
         
@@ -80,16 +77,13 @@ export default {
       parking: '無し',
       add_info: '',
       d_lat: this.lat,
-      d_lng: this.lng,
-      isDisplay: true
-      
+      d_lng: this.lng,     
     }
   },
   async beforeRouteEnter (to, from, next) {
-    console.log('test')
       if (to.params.id !== undefined) {
-        let endpoint = `/api/parks/${ to.params.id }/`;
-        let data = await apiService(endpoint);
+        let endpoint = `/api/parks/${ to.params.id }/`
+        let data = await apiService(endpoint)
         return next(vm => {
             (vm.park_name = data.park_name),
             (vm.playset_swing = data.playset_swing),
@@ -104,7 +98,7 @@ export default {
             (vm.d_lng = data.lng)
         });
       } else {
-          return next();
+          return next()
       }
     },
   methods: {
@@ -152,6 +146,4 @@ export default {
     }
   }
 }
-
-
 </script>

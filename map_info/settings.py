@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 import django_heroku
 
-# from map_info.settings_secret import SECRET_KEY
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,8 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# from .settings_secret import *
-SECRET_KEY = os.environ['SECRET_KEY']
+
+# ローカルで立ち上げる際に有効にする。デプロイ時はコメントアウト。
+from map_info.settings_secret import SECRET_KEY, BASICAUTH_USERS
+from .settings_secret import *
+BASICAUTH_USERS = BASICAUTH_USERS
+
+# デプロイ時に有効にする。ローカルで立ち上げる時はコメントアウト。
+# SECRET_KEY = os.environ['SECRET_KEY']
+# BASICAUTH_USERS = {os.environ.get('USER'):os.environ.get('PASS')}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,8 +144,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 REST_FRAMEWORK = {
     'PAGE_SIZE': 1000,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',)
 }
 
 WEBPACK_LOADER = {
