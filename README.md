@@ -97,6 +97,7 @@ https://mapinfo-6239.herokuapp.com/
 
 ### 公園情報の削除
 ①Map上のマーカーをクリックして、情報ウィンドウを開き「詳細」をクリック
+
 ②「削除」ボタンをクリックすると、トップページにリダイレクトし情報が消えている
 
 [![Image from Gyazo](https://i.gyazo.com/2974abaa6ae34fa8bd0e60ccf9441654.gif)](https://gyazo.com/2974abaa6ae34fa8bd0e60ccf9441654)
