@@ -104,7 +104,7 @@ export default {
         let infoWindow = new this.google.maps.InfoWindow({content: infoContent, maxWidth: 200})
         let latLng = new this.google.maps.LatLng(park.lat,park.lng)
         let marker = new this.google.maps.Marker({
-        position: latLng,
+          position: latLng,
         });
         // this.markers.push(marker)
         marker.setMap(this.map)

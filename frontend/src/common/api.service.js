@@ -11,14 +11,26 @@ function handleResponse(response) {
 }
 
 function apiService(endpoint, method, data) {
-    const config = {
-        method: method || "GET",
-        body: data !== undefined ? JSON.stringify(data) : null,
-        headers: {
-            "content-type": "application/json",
-            "X-CSRFTOKEN": CSRF_TOKEN
-        }
-    };
+    let config
+    if(method == 'POST' || method == 'PUT'){
+        const formData = new FormData()
+        Object.keys(data).forEach((key) => {
+        formData.append(key, data[key])
+        })
+        config = {
+            method: method,
+            // body: data !== undefined ? JSON.stringify(data) : null,
+            body: formData,
+            headers: {
+                // "content-type": "multipart/form-data",
+                "X-CSRFTOKEN": CSRF_TOKEN
+            }
+        };
+    }else{
+        config = {
+            method: method,
+        };
+    }
     return fetch(endpoint, config).then(handleResponse);
 }
 

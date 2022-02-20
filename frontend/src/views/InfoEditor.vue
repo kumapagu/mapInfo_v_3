@@ -46,7 +46,7 @@
           
           <v-textarea solo label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
-        
+        <input type="file" id="image">
       </v-row>
       
       <v-btn color="primary" type="submit">情報を登録</v-btn>      
@@ -105,11 +105,30 @@ export default {
     onSubmit() {
       let endpoint = "/api/parks/"
       let method = "POST"
+      let image = document.getElementById('image')
       if (this.id !== undefined) {
           endpoint += `${this.id}/`
           method = "PUT"
       }
-      apiService(endpoint, method, {
+      console.log(image.files)
+      let data
+      if(image.files && image.files.length > 0){
+        data = {
+        park_name: this.park_name,
+        playset_swing: this.playset_swing,
+        playset_slide: this.playset_slide,
+        playset_sandbox: this.playset_sandbox,
+        vending_machine: this.vending_machine,
+        water_services: this.water_services,
+        bicycle_parking: this.bicycle_parking,
+        parking: this.parking,
+        add_info: this.add_info,
+        image: image.files[0],
+        lat: this.d_lat,
+        lng: this.d_lng,
+        }
+      }else{
+        data = {
         park_name: this.park_name,
         playset_swing: this.playset_swing,
         playset_slide: this.playset_slide,
@@ -121,7 +140,9 @@ export default {
         add_info: this.add_info,
         lat: this.d_lat,
         lng: this.d_lng,
-      }).then(park_data => {
+       }
+      }
+      apiService(endpoint, method, data).then(park_data => {
         this.$router.push({
           name: 'park',
           params: { id: park_data.id }
