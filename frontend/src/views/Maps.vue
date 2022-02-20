@@ -106,7 +106,7 @@ export default {
         let marker = new this.google.maps.Marker({
         position: latLng,
         });
-        this.markers.push(marker)
+        // this.markers.push(marker)
         marker.setMap(this.map)
 
         marker.addListener("click", ()=>{
