@@ -83,7 +83,7 @@ export default {
       })  
     },
     setMarker() {
-      for(const park of this.parks){
+      for (const park of this.parks) {
         let infoContent = 
           `<h3>${park.park_name}</h3>` + 
           '<ul>' +
@@ -104,9 +104,9 @@ export default {
         let infoWindow = new this.google.maps.InfoWindow({content: infoContent, maxWidth: 200})
         let latLng = new this.google.maps.LatLng(park.lat,park.lng)
         let marker = new this.google.maps.Marker({
-        position: latLng,
+          position: latLng,
         });
-        this.markers.push(marker)
+        // this.markers.push(marker)
         marker.setMap(this.map)
 
         marker.addListener("click", ()=>{
@@ -120,7 +120,7 @@ export default {
       document.title = 'MapInfo';
     },
     createInfo(){
-      if(this.lat && this.lng){
+      if (this.lat && this.lng) {
       this.$router.push({
         name: 'info',
         params: {

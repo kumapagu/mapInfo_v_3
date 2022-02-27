@@ -10,6 +10,7 @@
             <p>駐車場：{{ park.parking }}</p>
             <p>自動販売機：{{ park.vending_machine }}</p>
             <p>その他の情報：{{ park.add_info }}</p>
+            <div><img :src="park.image"></div>
             <v-btn color="primary" class="mr-2" :to="{ name: 'info', params: { id: park.id } }">編集</v-btn>
             <v-btn color="primary" class="mr-2" href="/">マップへ戻る</v-btn>
             <v-btn color="error" @click="deleteParkData" href="/">削除</v-btn>
@@ -32,7 +33,6 @@ export default {
     data() {
         return {
             park: {},
-            isDisplay: true,
             lat: null,
             lng: null
         }
@@ -47,8 +47,9 @@ export default {
         getParkData() {
             let endpoint = `/api/parks/${this.id}/`
             apiService(endpoint).then(data => {
-                this.park = data;
-                this.setPageTitle(data.park_name);
+                console.log(data.image)
+                this.park = data
+                this.setPageTitle(data.park_name)
                 this.lat = data.lat
                 this.lng = data.lng
                 this.setSession()
@@ -73,6 +74,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+img {
+    width: 200px;
+}
     
 </style>
