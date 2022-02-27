@@ -83,7 +83,7 @@ export default {
       })  
     },
     setMarker() {
-      for(const park of this.parks){
+      for (const park of this.parks) {
         let infoContent = 
           `<h3>${park.park_name}</h3>` + 
           '<ul>' +
@@ -120,7 +120,7 @@ export default {
       document.title = 'MapInfo';
     },
     createInfo(){
-      if(this.lat && this.lng){
+      if (this.lat && this.lng) {
       this.$router.push({
         name: 'info',
         params: {
