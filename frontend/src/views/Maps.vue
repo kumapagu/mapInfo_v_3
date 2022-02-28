@@ -85,7 +85,7 @@ export default {
     setMarker() {
       for (const park of this.parks) {
         let infoContent = 
-          `<img src=${park.image}>` +
+          `<img src="${park.image}" alt="no image">` +
           `<h3>${park.park_name}</h3>` + 
           '<ul>' +
           `<li>ブランコ：${park.playset_swing}</li>` +
