@@ -44,12 +44,11 @@
         </v-col>
         <v-col cols="10">
           
-          <v-textarea solo label="その他の情報" v-model="add_info"></v-textarea>
+          <v-textarea solo rows="4" label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
         <input type="file" id="image">
       </v-row>
-      
-      <v-btn color="primary" type="submit">情報を登録</v-btn>      
+      <v-btn large class="mt-8" color="primary" type="submit">情報を登録</v-btn>
     </v-container>
   </form>
 
@@ -76,6 +75,7 @@ export default {
       bicycle_parking: '無し',
       parking: '無し',
       add_info: '',
+      image: '',
       d_lat: this.lat,
       d_lng: this.lng,     
     }
@@ -93,6 +93,7 @@ export default {
             (vm.water_services = data.water_services),
             (vm.bicycle_parking = data.bicycle_parking),
             (vm.parking = data.parking),
+            (vm.image = data.image),
             (vm.add_info = data.add_info),
             (vm.d_lat = data.lat),
             (vm.d_lng = data.lng)
