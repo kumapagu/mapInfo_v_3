@@ -44,12 +44,11 @@
         </v-col>
         <v-col cols="10">
           
-          <v-textarea solo label="その他の情報" v-model="add_info"></v-textarea>
+          <v-textarea solo rows="4" label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
         <input type="file" id="image">
       </v-row>
-      
-      <v-btn color="primary" type="submit">情報を登録</v-btn>      
+      <v-btn large class="mt-8" color="primary" type="submit">情報を登録</v-btn>
     </v-container>
   </form>
 
@@ -76,6 +75,7 @@ export default {
       bicycle_parking: '無し',
       parking: '無し',
       add_info: '',
+      image: '',
       d_lat: this.lat,
       d_lng: this.lng,     
     }
@@ -85,17 +85,18 @@ export default {
         let endpoint = `/api/parks/${ to.params.id }/`
         let data = await apiService(endpoint)
         return next(vm => {
-            (vm.park_name = data.park_name),
-            (vm.playset_swing = data.playset_swing),
-            (vm.playset_slide = data.playset_slide),
-            (vm.playset_sandbox = data.playset_sandbox),
-            (vm.vending_machine = data.vending_machine),
-            (vm.water_services = data.water_services),
-            (vm.bicycle_parking = data.bicycle_parking),
-            (vm.parking = data.parking),
-            (vm.add_info = data.add_info),
-            (vm.d_lat = data.lat),
-            (vm.d_lng = data.lng)
+          (vm.park_name = data.park_name),
+          (vm.playset_swing = data.playset_swing),
+          (vm.playset_slide = data.playset_slide),
+          (vm.playset_sandbox = data.playset_sandbox),
+          (vm.vending_machine = data.vending_machine),
+          (vm.water_services = data.water_services),
+          (vm.bicycle_parking = data.bicycle_parking),
+          (vm.parking = data.parking),
+          (vm.image = data.image),
+          (vm.add_info = data.add_info),
+          (vm.d_lat = data.lat),
+          (vm.d_lng = data.lng)
         });
       } else {
           return next()
@@ -107,12 +108,12 @@ export default {
       let method = "POST"
       let image = document.getElementById('image')
       if (this.id !== undefined) {
-          endpoint += `${this.id}/`
-          method = "PUT"
+        endpoint += `${this.id}/`
+        method = "PUT"
       }
       console.log(image.files)
       let data
-      if(image.files && image.files.length > 0){
+      if (image.files && image.files.length > 0){
         data = {
         park_name: this.park_name,
         playset_swing: this.playset_swing,
@@ -127,7 +128,7 @@ export default {
         lat: this.d_lat,
         lng: this.d_lng,
         }
-      }else{
+      } else {
         data = {
         park_name: this.park_name,
         playset_swing: this.playset_swing,
@@ -147,7 +148,7 @@ export default {
           name: 'park',
           params: { id: park_data.id }
         })
-      })     
+      })
     },
     setSession(){
       sessionStorage.setItem('lat', this.d_lat)
@@ -156,12 +157,11 @@ export default {
   },
   created() {
     document.title = "Editor - park"
-    
   },
   mounted(){
-    if(this.d_lat){
+    if (this.d_lat){
       this.setSession()
-    }else{
+    } else {
       this.d_lat = Number((sessionStorage.getItem('lat')))
       this.d_lng = Number((sessionStorage.getItem('lng')))
     }
