@@ -1,18 +1,12 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-// import Home from "../views/Home";
+import Vue from "vue"
+import VueRouter from "vue-router"
 import Maps from "../views/Maps"
 import InfoEditor from "../views/InfoEditor"
 import Park from "../views/Park"
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "Home",
-  //   component: Home,
-  // },
   {
     path: "/",
     name: "maps",
@@ -30,21 +24,12 @@ const routes = [
     name: "park",
     component: Park,
     props: true,
-    // children: [
-    //   {
-    //     path: "/park/:id/edit",
-    //     name: 'edit',
-    //     component: InfoEditor,
-    //     props: true
-    //   }
-    // ]
   },
 ];
 
 const router = new VueRouter({
   mode: "history",
-  // base: process.env.BASE_URL,
   routes
 });
 
-export default router;
+export default router

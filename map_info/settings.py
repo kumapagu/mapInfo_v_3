@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'rest_framework', 
     'webpack_loader',
     'map_app',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'map_info.urls'
@@ -134,15 +133,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-print(STATIC_ROOT)
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'staticfiles/'),
-# )
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frontend/dist/static/'),
+)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-print('hello')
-print(MEDIA_ROOT)
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
@@ -157,4 +153,4 @@ WEBPACK_LOADER = {
     }
 }
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())

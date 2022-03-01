@@ -1,6 +1,5 @@
 from rest_framework import generics
 from map_app.models import ParkInfo
-from map_app.api.permissions import IsAdminUserOrReadOnly
 from map_app.api.serializers import ParkInfoSerializer
 
 class ParkInfoCreateAPIView(generics.ListCreateAPIView):

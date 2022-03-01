@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     setPageTitle(title) {
-      document.title = title;
+      document.title = title
     },
     getParkData() {
       let endpoint = `/api/parks/${this.id}/`

@@ -41,8 +41,8 @@ export default {
       this.mapConfig.center.lat = Number((sessionStorage.getItem('lat')))
       this.mapConfig.center.lng = Number((sessionStorage.getItem('lng')))
     }
-    this.initializeMap();
-    window.onload = ()=>{
+    this.initializeMap()
+    window.onload = () => {
       this.setMarker()
     }
   },
@@ -50,11 +50,11 @@ export default {
     initializeMap() {
       
       
-      const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig);
+      const map = new this.google.maps.Map(this.$refs.googleMap, this.mapConfig)
       this.map = map
       map.addListener("click", (e) => {
         this.deleteMarker()
-        this.placeMarkerAndPanTo(e.latLng, map);
+        this.placeMarkerAndPanTo(e.latLng, map)
         this.lat = e.latLng.lat()
         this.lng = e.latLng.lng()
       });
@@ -108,7 +108,6 @@ export default {
         let marker = new this.google.maps.Marker({
           position: latLng,
         });
-        // this.markers.push(marker)
         marker.setMap(this.map)
 
         marker.addListener("click", ()=>{
@@ -119,7 +118,7 @@ export default {
           })
         })
       }
-      document.title = 'MapInfo';
+      document.title = 'MapInfo'
     },
     createInfo(){
       if (this.lat && this.lng) {
@@ -130,7 +129,7 @@ export default {
           lng: this.lng,
         }
       })
-      }else{
+      } else {
         alert('場所を選択してください')
       }
     }    
