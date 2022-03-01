@@ -46,7 +46,13 @@
           
           <v-textarea solo rows="4" label="その他の情報" v-model="add_info"></v-textarea>
         </v-col>
-        <input type="file" id="image">
+        <input type="file" id="image" ref="preview" @change="previewImage">
+        <div v-if="previewImg">
+          <img class="preview-image" :src="previewImg">
+        </div>
+        <div v-if="image && previewImg == ''">
+          <img class="preview-image" :src="image">
+        </div>
       </v-row>
       <v-btn large class="mt-8" color="primary" type="submit">情報を登録</v-btn>
     </v-container>
@@ -77,7 +83,8 @@ export default {
       add_info: '',
       image: '',
       d_lat: this.lat,
-      d_lng: this.lng,     
+      d_lng: this.lng,
+      previewImg: ''
     }
   },
   async beforeRouteEnter (to, from, next) {
@@ -111,7 +118,6 @@ export default {
         endpoint += `${this.id}/`
         method = "PUT"
       }
-      console.log(image.files)
       let data
       if (image.files && image.files.length > 0){
         data = {
@@ -153,6 +159,10 @@ export default {
     setSession(){
       sessionStorage.setItem('lat', this.d_lat)
       sessionStorage.setItem('lng', this.d_lng)
+    },
+    previewImage() {
+      let file = this.$refs.preview.files[0]
+      this.previewImg = URL.createObjectURL(file)
     }
   },
   created() {
@@ -168,3 +178,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.preview-image {
+  width: 200px;
+}
+</style>
